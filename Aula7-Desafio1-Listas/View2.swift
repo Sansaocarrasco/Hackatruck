@@ -9,17 +9,16 @@ import SwiftUI
 
 struct View2: View {
     
-    @State var name: String = "nome"
-    @State var capa: String = "https://i.pinimg.com/236x/1c/6a/9a/1c6a9aad1ef5b71201598fbea3f1d1e5.jpg"
-    @State var artist: String = "adam sandler"
+    @State var name: String = ""
+    @State var capa: String = ""
+    @State var artist: String = ""
     
     
     var body: some View {
         
-        VStack(alignment: .leading){
+        VStack(){
             Spacer()
             
-            ScrollView{
                 AsyncImage(url: URL(string: capa)){ result in
                     result.image?
                         .resizable()
@@ -28,23 +27,45 @@ struct View2: View {
                 .frame(width: 150, height: 250)
                 
                 HStack{
-                    AsyncImage(url: URL(string: capa)){ result in
-                        result.image?
-                            .resizable()
-                            .scaledToFill()
-                    }
-                    .frame(width: 30, height: 20)
-                    .padding()
-                    
-                    VStack(alignment: .leading){
-                        Text(name)
-                            .bold()
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
+                    Text(name)
+                        .foregroundColor(.white)
                 }
+                HStack{
+                    Text(artist)
+                        .foregroundColor(.white)
+                }
+            
+            HStack{
+                Image(systemName: "shuffle")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .padding()
+                Image(systemName: "backward.end.fill")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .padding()
+                Image(systemName: "play.fill")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .padding()
+                Image(systemName: "forward.end.fill")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .padding()
+                Image(systemName: "repeat")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .padding()
                 
             }
+            .padding(10)
+            
+            Spacer()
             
         }
         .frame(maxWidth: .infinity)
