@@ -15,10 +15,23 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        latitude = Float(location.coordinate.latitude)
-        longitude = Float(location.coordinate.longitude)
-    }
+            guard let location = locations.last else { return }
+            
+            // Atualiza a latitude e longitude
+            let newLatitude = Float(location.coordinate.latitude)
+            let newLongitude = Float(location.coordinate.longitude)
+            
+            // Verifica se a localização mudou antes de fazer o post
+            if newLatitude != latitude || newLongitude != longitude {
+                latitude = newLatitude
+                longitude = newLongitude
+                
+                // Faz o post no banco de dados
+                postColeira(latitude: latitude, longitude: longitude) {
+                    // Aqui você pode adicionar lógica adicional após o post, se necessário
+                }
+            }
+        }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
@@ -44,7 +57,7 @@ struct ContentView: View {
                 }
             }
             .padding(10)
-            .background(.white)
+            .background(.black)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding()
         }
