@@ -2,7 +2,7 @@ import Foundation
 
 // Estrutura para os dados que você vai enviar
 func postColeira(latitude: Float, longitude: Float, completion: @escaping () -> Void) {
-    guard let url = URL(string: "http://127.0.0.1:1880/coleiraPOST") else {
+    guard let url = URL(string: "http://10.87.154.149:1880/coleiraPOST") else {
         print("URL inválida")
         return
     }
@@ -23,7 +23,7 @@ func postColeira(latitude: Float, longitude: Float, completion: @escaping () -> 
             }
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                print("Usuário enviado com sucesso!")
+ //               print("Usuário enviado com sucesso!")
                 DispatchQueue.main.async {
                     completion() // Chama o closure após o envio bem-sucedido
                 }
